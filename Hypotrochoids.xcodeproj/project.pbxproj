@@ -7,15 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		87EC7C942895FACF000B1DB6 /* HypotrochoidsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 87EC7C932895FACF000B1DB6 /* HypotrochoidsView.h */; };
-		87EC7C962895FACF000B1DB6 /* HypotrochoidsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EC7C952895FACF000B1DB6 /* HypotrochoidsView.m */; };
 		87EC7C9D2895FAF1000B1DB6 /* HypotroichoidsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EC7C9C2895FAF1000B1DB6 /* HypotroichoidsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		87EC7C902895FACF000B1DB6 /* Hypotrochoids.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hypotrochoids.saver; sourceTree = BUILT_PRODUCTS_DIR; };
-		87EC7C932895FACF000B1DB6 /* HypotrochoidsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HypotrochoidsView.h; sourceTree = "<group>"; };
-		87EC7C952895FACF000B1DB6 /* HypotrochoidsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HypotrochoidsView.m; sourceTree = "<group>"; };
 		87EC7C9C2895FAF1000B1DB6 /* HypotroichoidsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypotroichoidsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,8 +45,6 @@
 		87EC7C922895FACF000B1DB6 /* Hypotrochoids */ = {
 			isa = PBXGroup;
 			children = (
-				87EC7C932895FACF000B1DB6 /* HypotrochoidsView.h */,
-				87EC7C952895FACF000B1DB6 /* HypotrochoidsView.m */,
 				87EC7C9C2895FAF1000B1DB6 /* HypotroichoidsView.swift */,
 			);
 			path = Hypotrochoids;
@@ -63,7 +57,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87EC7C942895FACF000B1DB6 /* HypotrochoidsView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +130,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				87EC7C9D2895FAF1000B1DB6 /* HypotroichoidsView.swift in Sources */,
-				87EC7C962895FACF000B1DB6 /* HypotrochoidsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
