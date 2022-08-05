@@ -19,7 +19,10 @@ class HypotrochoidsView: ScreenSaverView {
     }
 
     override func draw(_ rect: NSRect) {
-        let context = NSGraphicsContext.current?.cgContext
+        guard let context = NSGraphicsContext.current?.cgContext else {
+            fatalError("Unable to obtain core graphics context")
+        }
+
         let midscreenX = bounds.width/2
         let midscreenY = bounds.height/2
 
@@ -40,10 +43,10 @@ class HypotrochoidsView: ScreenSaverView {
             }
             path.closeSubpath()
 
-            context?.setStrokeColor(color)
-            context?.setLineWidth(2)
-            context?.addPath(path)
-            context?.drawPath(using: .stroke)
+            context.setStrokeColor(color)
+            context.setLineWidth(2)
+            context.addPath(path)
+            context.drawPath(using: .stroke)
         }
      }
 
