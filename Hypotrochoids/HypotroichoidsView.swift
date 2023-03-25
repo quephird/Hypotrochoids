@@ -8,9 +8,16 @@
 import ScreenSaver
 
 class HypotrochoidsView: ScreenSaverView {
+    var d: Int = 0
+    var radii: [(Int, Int)] = []
+    var scales: [Double] = []
+    var colors: [CGColor] = []
+    var dts: [Double] = []
+    var tick: Int = 0
+
     override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
-        self.animationTimeInterval = 3
+        self.randomizeAllMetrics()
     }
 
     @available(*, unavailable)
@@ -26,15 +33,17 @@ class HypotrochoidsView: ScreenSaverView {
         let midscreenX = bounds.width/2
         let midscreenY = bounds.height/2
 
-        let d = Int.random(in: 10...30)
-        for i in 1...3 {
-            let (a, b) = randomRadii()
-            let scale = Double.random(in: 5...12)
-            let color = randomColor()
+        for i in 0...2 {
+            let (a, b) = self.radii[i]
+            let scale = scales[i]
+            let color = colors[i]
 
             let path = CGMutablePath()
+            let dt = self.dts[i]*Double(tick)
             for t in stride(from: 0, to: 2*Double.pi*Double(lcm(a, b)), by: 0.1) {
-                let (x, y) = hypotrochoid(a: Double(a), b: Double(b), d: Double(d+i), t: t)
+                var (x, y) = hypotrochoid(a: Double(a), b: Double(b), d: Double(d+i), t: t)
+                (x, y) = (x*cos(dt) - y*sin(dt), y*cos(dt) + x*sin(dt))
+
                 if t == 0 {
                     path.move(to: CGPoint(x: midscreenX + scale*x, y: midscreenY + scale*y))
                 } else {
@@ -52,6 +61,12 @@ class HypotrochoidsView: ScreenSaverView {
 
     override func animateOneFrame() {
         super.animateOneFrame()
+        tick += 1
+
+        if tick%100 == 0 {
+            self.randomizeAllMetrics()
+        }
+
         setNeedsDisplay(bounds)
     }
 
@@ -59,6 +74,21 @@ class HypotrochoidsView: ScreenSaverView {
         let x = (a - b)*cos(t) + d*cos((a - b)*t/b)
         let y = (a - b)*sin(t) - d*sin((a - b)*t/b)
         return (x, y)
+    }
+
+    func randomizeAllMetrics() {
+        self.radii.removeAll()
+        self.scales.removeAll()
+        self.colors.removeAll()
+        self.dts.removeAll()
+
+        self.d = Int.random(in: 10...30)
+        for _ in 1...3 {
+            self.radii.append(self.randomRadii())
+            self.scales.append(Double.random(in: 5...12))
+            self.colors.append(self.randomColor())
+            self.dts.append(Double.random(in: -0.05...0.05))
+        }
     }
 
     func randomRadii() -> (Int, Int) {
