@@ -13,7 +13,8 @@ class HypotrochoidsView: ScreenSaverView {
     var scales: [Double] = []
     var colors: [CGColor] = []
     var dts: [Double] = []
-    var tick: Int = 0
+    var timer: Date = Date()
+    var frameNumber = 0
 
     override init?(frame: NSRect, isPreview: Bool) {
         super.init(frame: frame, isPreview: isPreview)
@@ -39,7 +40,7 @@ class HypotrochoidsView: ScreenSaverView {
             let color = colors[i]
 
             let path = CGMutablePath()
-            let dt = self.dts[i]*Double(tick)
+            let dt = self.dts[i]*Double(frameNumber)
             for t in stride(from: 0, to: 2*Double.pi*Double(lcm(a, b)), by: 0.1) {
                 var (x, y) = hypotrochoid(a: Double(a), b: Double(b), d: Double(d+i), t: t)
                 (x, y) = (x*cos(dt) - y*sin(dt), y*cos(dt) + x*sin(dt))
@@ -61,9 +62,12 @@ class HypotrochoidsView: ScreenSaverView {
 
     override func animateOneFrame() {
         super.animateOneFrame()
-        tick += 1
+        self.frameNumber += 1
 
-        if tick%100 == 0 {
+        let elapsedTime = -timer.timeIntervalSinceNow
+        if elapsedTime >= 5.0 {
+            self.frameNumber = 0
+            self.timer = Date()
             self.randomizeAllMetrics()
         }
 
